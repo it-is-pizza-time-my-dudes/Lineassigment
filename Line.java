@@ -58,7 +58,7 @@ public class Line {
 
     // isParallel finds if two lines are parallel
     public boolean isParallel(Line line) {
-        if (slope - line.slope < Math.abs(0.0000001)) {
+        if (slope - line.slope < 0.0000001||slope - line.slope > -0.00000001) {
             return true;
         } else {
             return false;
@@ -69,7 +69,7 @@ public class Line {
         Line holder = new Line(slope, yintercept);
         double x;
         double y;
-        if (slope - line.slope < Math.abs(0.0000001)) {
+        if (slope - line.slope < 0.0000001||slope-line.slope>-0.0000001) {
             return null;
         } else {
             if (line.slope > 0) {
