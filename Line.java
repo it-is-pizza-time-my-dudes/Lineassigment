@@ -18,14 +18,14 @@ public class Line {
         yfactor = y_factor;
         xfactor = x_factor;
         yintercept = y_intercept / yfactor;
-        slope = yfactor / xfactor;
+        slope = x_factor/y_factor;
         point = new Point(1, slope);
     }
 
     public Line(double Slope, Point Point) {
         slope = Slope;
         point = Point;
-        yintercept = point.getY() - (point.getX() * slope);
+        yintercept = Point.getY()-(Point.getX()*slope);
         yfactor = 1;
         xfactor = slope;
     }
@@ -58,7 +58,7 @@ public class Line {
 
     // isParallel finds if two lines are parallel
     public boolean isParallel(Line line) {
-        if (slope - line.slope < 0.0000001||slope - line.slope > -0.00000001) {
+        if (Math.abs(slope - line.slope) < 0.0000000001) {
             return true;
         } else {
             return false;
@@ -66,31 +66,17 @@ public class Line {
     }
 
     public Point intersects(Line line) {
-        Line holder = new Line(slope, yintercept);
         double x;
         double y;
-        if (slope - line.slope < 0.0000001||slope-line.slope>-0.0000001) {
+        System.out.println(slope);
+        System.out.println(line.slope);
+        System.out.println(yintercept);
+        System.out.println(line.yintercept);
+        if (Math.abs(slope - line.slope) < 0.0000000001) {
             return null;
         } else {
-            if (line.slope > 0) {
-                holder.slope = slope - line.slope;
-                if (yintercept > 0) {
-                    holder.yintercept = line.yintercept - yintercept;
-                } else if (yintercept < 0) {
-                    holder.yintercept = line.yintercept + yintercept;
-                }
-            } else if (line.slope < 0) {
-                holder.slope = slope + line.slope;
-                if (yintercept > 0) {
-                    holder.yintercept = line.yintercept - yintercept;
-                } else if (yintercept < 0) {
-                    holder.yintercept = line.yintercept + yintercept;
-                }
-            }
-            holder.yintercept = holder.yintercept / holder.slope;
-            x = holder.yintercept;
-            y = line.slope * x + line.yintercept;
-
+            x=(yintercept-line.yintercept)/(line.slope-slope);
+            y = this.slope * x + this.yintercept;
         }
         Point interception = new Point(x, y);
         return interception;
