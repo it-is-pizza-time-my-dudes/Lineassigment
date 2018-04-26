@@ -17,7 +17,7 @@ public class Line {
     public Line(double x_factor, double y_factor, double y_intercept) {
         yfactor = y_factor;
         xfactor = x_factor;
-        yintercept = y_intercept / yfactor;
+        yintercept = y_intercept*-1 / yfactor;
         slope = x_factor/y_factor;
         point = new Point(1, slope);
     }
